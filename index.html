@@ -1,260 +1,367 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRPG WORLD</title>
-
-    <style>
-        /* 기본 설정 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8f9fc;
-            color: #25283a;
-        }
-
-        /* 상단 메뉴 */
-        header {
-            width: 100%;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 10%;
-            background: rgba(255,255,255,0.85);
-            border-bottom: 1px solid #eeeeF4;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: bold;
-            color: #6657d9;
-        }
-
-        nav {
-            display: flex;
-            gap: 30px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #55596c;
-            font-size: 15px;
-            transition: 0.2s;
-        }
-
-        nav a:hover {
-            color: #6657d9;
-        }
-
-        /* 메인 배경 */
-        .hero {
-            min-height: 650px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-
-            background:
-                radial-gradient(
-                    circle at 20% 30%,
-                    #e9e5ff 0%,
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 80% 70%,
-                    #e2edff 0%,
-                    transparent 35%
-                ),
-                #f8f9fc;
-        }
-
-        /* 작은 안내 문구 */
-        .tag {
-            background: #eeebff;
-            color: #6657d9;
-            padding: 9px 18px;
-            border-radius: 30px;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
-
-        /* 메인 제목 */
-        .hero h1 {
-            font-size: 55px;
-            line-height: 1.3;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-        }
-
-        .hero h1 span {
-            color: #7061e8;
-        }
-
-        .hero p {
-            font-size: 17px;
-            color: #85899b;
-            line-height: 1.8;
-            margin-bottom: 35px;
-        }
-
-        /* 버튼 영역 */
-        .buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 16px 30px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: bold;
-            text-decoration: none;
-            cursor: pointer;
-            transition: 0.25s;
-            border: none;
-        }
-
-        /* 메인 버튼 */
-        .btn-primary {
-            background: #7061e8;
-            color: white;
-            box-shadow: 0 5px 15px #7061e833;
-        }
-
-        .btn-primary:hover {
-            background: #5949cf;
-            transform: translateY(-3px);
-        }
-
-        /* 보조 버튼 */
-        .btn-secondary {
-            background: white;
-            color: #55596c;
-            border: 1px solid #e3e4ec;
-        }
-
-        .btn-secondary:hover {
-            background: #f0eeff;
-            border-color: #7061e8;
-            transform: translateY(-3px);
-        }
-
-        /* 아래 소개 영역 */
-        .intro {
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .intro h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .intro p {
-            color: #85899b;
-            line-height: 1.8;
-        }
-
-        /* 모바일 화면 */
-        @media (max-width: 650px) {
-            header {
-                padding: 0 5%;
-            }
-
-            nav {
-                gap: 12px;
-            }
-
-            nav a {
-                font-size: 12px;
-            }
-
-            .logo {
-                font-size: 19px;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .buttons {
-                flex-direction: column;
-                width: 80%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fb">
+  <title>Primordium Academy</title>
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f0eff8;
+      --text: #242338;
+      --muted: #77758b;
+      --line: #e8e6f0;
+      --primary: #7665c9;
+      --primary-dark: #6252b2;
+      --primary-soft: #eeebfb;
+      --danger: #c65365;
+      --shadow: 0 18px 55px rgba(45, 39, 83, .08);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; color: var(--text); background:
+        radial-gradient(circle at 12% 8%, rgba(206, 199, 255, .25), transparent 27rem),
+        radial-gradient(circle at 90% 22%, rgba(210, 232, 255, .3), transparent 24rem),
+        var(--bg);
+      font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+    }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .topbar {
+      height: 76px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 max(5vw, 22px); background: rgba(255,255,255,.82);
+      border-bottom: 1px solid rgba(232,230,240,.8); backdrop-filter: blur(14px);
+      position: sticky; top: 0; z-index: 10;
+    }
+    .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.04em; }
+    .brand-mark { width:34px; height:34px; border-radius:12px; display:grid; place-items:center; color:white;
+      background: linear-gradient(135deg,#a69ae9,#7160c5); box-shadow:0 6px 15px #8c7bd044; }
+    .brand-name { font-size:17px; }
+    .nav { display:flex; align-items:center; gap:8px; }
+    .nav button, .link-btn { border:0; background:transparent; color:var(--muted); padding:10px 13px; border-radius:11px; }
+    .nav button:hover, .link-btn:hover { background:var(--surface-soft); color:var(--text); }
+    .nav .nav-cta { background:var(--primary); color:white; padding:11px 17px; }
+    .nav .nav-cta:hover { background:var(--primary-dark); color:white; }
+    main { width:min(1100px, 90vw); margin:0 auto; }
+    .hero { min-height:510px; display:flex; align-items:center; padding:70px 0 55px; }
+    .hero-copy { max-width:700px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; padding:8px 13px; border-radius:99px;
+      background:var(--primary-soft); color:var(--primary-dark); font-size:12px; font-weight:750; letter-spacing:.04em; }
+    h1 { font-size:clamp(42px,7vw,76px); line-height:1.12; letter-spacing:-.065em; margin:22px 0 18px; }
+    .gradient-text { background:linear-gradient(100deg,#7867ca,#9a8bd9 55%,#6d91c8); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .lead { color:var(--muted); font-size:17px; line-height:1.9; max-width:590px; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+    .btn { border:0; border-radius:13px; padding:13px 19px; font-weight:700; transition:.18s; }
+    .btn-primary { color:white; background:var(--primary); box-shadow:0 8px 20px #7665c933; }
+    .btn-primary:hover { background:var(--primary-dark); transform:translateY(-1px); }
+    .btn-secondary { color:var(--text); background:white; border:1px solid var(--line); }
+    .btn-secondary:hover { background:var(--surface-soft); }
+    .section { padding:34px 0 85px; }
+    .section-heading { margin-bottom:22px; }
+    .section-heading h2 { margin:0 0 8px; font-size:27px; letter-spacing:-.04em; }
+    .section-heading p { margin:0; color:var(--muted); line-height:1.7; }
+    .feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .feature { background:rgba(255,255,255,.8); border:1px solid var(--line); border-radius:var(--radius); padding:23px; box-shadow:0 8px 30px rgba(45,39,83,.035); }
+    .feature-icon { width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:var(--primary-soft); font-size:19px; margin-bottom:18px; }
+    .feature h3 { margin:0 0 8px; font-size:16px; }
+    .feature p { margin:0; color:var(--muted); font-size:14px; line-height:1.75; }
+    footer { border-top:1px solid var(--line); color:var(--muted); padding:25px 5vw; text-align:center; font-size:12px; }
+    .view { display:none; padding:55px 0 90px; min-height:70vh; }
+    .view.active { display:block; }
+    .panel { width:min(560px,100%); margin:0 auto; background:var(--surface); border:1px solid var(--line); border-radius:24px; padding:30px; box-shadow:var(--shadow); }
+    .panel.wide { width:min(850px,100%); }
+    .panel h2 { margin:0 0 8px; font-size:27px; letter-spacing:-.04em; }
+    .sub { margin:0 0 25px; color:var(--muted); line-height:1.7; font-size:14px; }
+    .field { display:block; margin:16px 0; }
+    .field span { display:block; margin-bottom:8px; font-size:13px; font-weight:700; }
+    .field input, .field textarea { width:100%; border:1px solid var(--line); background:#fcfcfe; border-radius:12px; padding:13px 14px; outline:none; color:var(--text); }
+    .field input:focus, .field textarea:focus { border-color:#a99de5; box-shadow:0 0 0 3px #7665c91a; }
+    .field textarea { min-height:110px; resize:vertical; }
+    .full { width:100%; margin-top:10px; }
+    .form-note { color:var(--muted); font-size:12px; line-height:1.7; margin-top:16px; }
+    .form-error { color:var(--danger); font-size:13px; min-height:20px; margin-top:8px; }
+    .profile-head { display:flex; align-items:center; gap:16px; margin-bottom:24px; }
+    .avatar { width:70px; height:70px; border-radius:50%; display:grid; place-items:center; background:var(--primary-soft); color:var(--primary-dark); font-size:27px; overflow:hidden; flex:none; }
+    .avatar img { width:100%; height:100%; object-fit:cover; }
+    .profile-head p { color:var(--muted); margin:5px 0 0; font-size:13px; }
+    .admin-list { display:grid; gap:12px; margin-top:20px; }
+    .admin-item { border:1px solid var(--line); border-radius:14px; padding:15px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .admin-item small { display:block; color:var(--muted); margin-top:4px; }
+    .tag { display:inline-block; padding:5px 9px; border-radius:99px; background:var(--primary-soft); color:var(--primary-dark); font-size:11px; font-weight:750; }
+    .notice { background:#fff9e9; border:1px solid #f1e6c6; color:#78653c; padding:13px 15px; border-radius:13px; font-size:12px; line-height:1.7; margin-top:18px; }
+    .hidden { display:none !important; }
+    @media(max-width:700px) {
+      .topbar { height:auto; min-height:68px; padding:13px 5vw; align-items:flex-start; gap:10px; flex-direction:column; }
+      .nav { width:100%; overflow-x:auto; }
+      .nav button { white-space:nowrap; padding:9px 11px; font-size:13px; }
+      .hero { min-height:430px; padding:55px 0; }
+      .feature-grid { grid-template-columns:1fr; }
+      .panel { padding:23px; }
+      .admin-item { align-items:flex-start; flex-direction:column; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">P</div><span class="brand-name">Primordium Academy</span></div>
+    <nav class="nav" aria-label="주 메뉴">
+      <button onclick="showView('home')">홈</button>
+      <button onclick="showView('login')" id="loginNav">로그인</button>
+      <button onclick="showView('signup')" id="signupNav" class="nav-cta">회원가입</button>
+      <button onclick="showView('mypage')" id="mypageNav" class="hidden">마이페이지</button>
+      <button onclick="showView('admin')" id="adminNav" class="hidden">관리자</button>
+      <button onclick="logout()" id="logoutNav" class="hidden">로그아웃</button>
+    </nav>
+  </header>
 
-    <!-- 상단 메뉴 -->
-    <header>
-        <div class="logo">TRPG WORLD</div>
+  <main>
+    <section id="home" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">✦ YOUR OWN SPACE, YOUR OWN STORY</span>
+          <h1>이야기가 시작되는 곳,<br><span class="gradient-text">Primordium Academy</span></h1>
+          <p class="lead">각자의 상상과 취향이 모여 새로운 세계를 만드는 공간.<br>Primordium Academy의 첫 페이지입니다.</p>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="showView('signup')">시작하기</button>
+            <button class="btn btn-secondary" onclick="showView('login')">로그인</button>
+          </div>
+        </div>
+      </div>
+      <section class="section">
+        <div class="section-heading"><h2>새로운 공간을 준비하고 있어요</h2><p>이곳의 구체적인 기능과 방향은 앞으로 함께 정해 나갈 예정입니다.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><div class="feature-icon">✧</div><h3>나만의 프로필</h3><p>닉네임과 소개를 설정하고 나를 표현하는 공간.</p></article>
+          <article class="feature"><div class="feature-icon">◇</div><h3>함께 만드는 공간</h3><p>사람들과 취향과 이야기를 나눌 수 있는 공간을 준비 중입니다.</p></article>
+          <article class="feature"><div class="feature-icon">⌘</div><h3>유연한 관리</h3><p>운영진이 안전하게 공간을 관리할 수 있도록 설계합니다.</p></article>
+        </div>
+      </section>
+    </section>
 
-        <nav>
-            <a href="#">홈</a>
-            <a href="#intro">소개</a>
-            <a href="#">세션 목록</a>
-            <a href="#">가이드</a>
-        </nav>
-    </header>
+    <section id="login" class="view">
+      <div class="panel">
+        <h2>로그인</h2><p class="sub">Primordium Academy에 돌아오신 것을 환영합니다.</p>
+        <form id="loginForm">
+          <label class="field"><span>아이디</span><input id="loginId" autocomplete="username" required></label>
+          <label class="field"><span>비밀번호</span><input id="loginPassword" type="password" autocomplete="current-password" required></label>
+          <div class="form-error" id="loginError"></div>
+          <button class="btn btn-primary full" type="submit">로그인</button>
+        </form>
+        <p class="form-note">아직 계정이 없나요? <button class="link-btn" onclick="showView('signup')">회원가입</button></p>
+      </div>
+    </section>
 
-    <!-- 메인 화면 -->
-    <main>
-        <section class="hero">
+    <section id="signup" class="view">
+      <div class="panel">
+        <h2>회원가입</h2><p class="sub">아이디와 비밀번호를 만들어 주세요. 닉네임은 가입 후 마이페이지에서 설정할 수 있습니다.</p>
+        <form id="signupForm">
+          <label class="field"><span>아이디</span><input id="signupId" minlength="3" maxlength="24" autocomplete="username" required placeholder="3~24자"></label>
+          <label class="field"><span>비밀번호</span><input id="signupPassword" type="password" minlength="8" autocomplete="new-password" required placeholder="8자 이상"></label>
+          <label class="field"><span>비밀번호 확인</span><input id="signupPassword2" type="password" minlength="8" autocomplete="new-password" required></label>
+          <label class="field"><span>관리자 초대 코드 <small style="display:inline;color:var(--muted);font-weight:400">(관리자로 초대받은 경우에만 입력)</small></span><input id="inviteCode" autocomplete="off" placeholder="일반 회원은 비워 두세요"></label>
+          <div class="form-error" id="signupError"></div>
+          <button class="btn btn-primary full" type="submit">가입하기</button>
+        </form>
+        <p class="form-note">이미 계정이 있나요? <button class="link-btn" onclick="showView('login')">로그인</button></p>
+      </div>
+    </section>
 
-            <div class="tag">
-                ✦ YOUR OWN FANTASY WORLD
-            </div>
+    <section id="mypage" class="view">
+      <div class="panel">
+        <div class="profile-head">
+          <div class="avatar" id="avatarPreview">✧</div>
+          <div><h2 id="profileTitle">마이페이지</h2><p id="profileId"></p></div>
+        </div>
+        <form id="profileForm">
+          <label class="field"><span>닉네임</span><input id="nickname" maxlength="24" placeholder="사용할 닉네임"></label>
+          <label class="field"><span>프로필 이미지</span><input id="avatarFile" type="file" accept="image/*"></label>
+          <label class="field"><span>자기소개</span><textarea id="bio" maxlength="500" placeholder="나를 소개해 주세요."></textarea></label>
+          <button class="btn btn-primary full" type="submit">프로필 저장</button>
+        </form>
+        <hr style="border:0;border-top:1px solid var(--line);margin:25px 0">
+        <h3>비밀번호 변경</h3>
+        <form id="passwordForm">
+          <label class="field"><span>현재 비밀번호</span><input id="oldPassword" type="password" required></label>
+          <label class="field"><span>새 비밀번호</span><input id="newPassword" type="password" minlength="8" required></label>
+          <div class="form-error" id="passwordError"></div>
+          <button class="btn btn-secondary full" type="submit">비밀번호 변경</button>
+        </form>
+        <button class="btn full" style="background:#fff0f1;color:var(--danger);margin-top:24px" onclick="deleteAccount()">회원 탈퇴</button>
+      </div>
+    </section>
 
-            <h1>
-                당신만의 이야기를<br>
-                <span>시작해 보세요.</span>
-            </h1>
+    <section id="admin" class="view">
+      <div class="panel wide">
+        <span class="tag">OWNER / ADMIN</span>
+        <h2 style="margin-top:14px">관리자 페이지</h2>
+        <p class="sub">관리자 초대 코드를 발급하고, 이 브라우저에서 생성된 데모 회원 목록을 확인합니다.</p>
+        <div id="ownerTools">
+          <h3>1회용 관리자 초대 코드 발급</h3>
+          <p class="form-note">코드는 한 번 가입에 사용되면 즉시 사용할 수 없게 됩니다.</p>
+          <button class="btn btn-primary" onclick="createInvite()">초대 코드 발급</button>
+          <div id="newInvite" class="notice hidden"></div>
+        </div>
+        <div class="admin-list" id="memberList"></div>
+        <div class="notice">중요: 현재는 화면과 흐름을 확인하기 위한 프론트엔드 시제품입니다. 계정·비밀번호·권한·초대 코드는 이 브라우저의 localStorage에만 저장되며, 다른 사람과 공유되지 않고 안전한 인증도 제공하지 않습니다. 실제 서비스로 공개하기 전에는 서버/인증 서비스와 데이터베이스를 연결해야 합니다.</div>
+      </div>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> Primordium Academy · A space for stories yet to be told.</footer>
 
-            <p>
-                친구들과 함께 모험을 떠나고<br>
-                새로운 세계와 이야기를 만들어 보세요.
-            </p>
+  <script>
+    // 데모용 저장소입니다. 실제 서비스의 인증/권한 검증으로 사용하면 안 됩니다.
+    const USERS_KEY = 'pa_demo_users_v1';
+    const INVITES_KEY = 'pa_demo_invites_v1';
+    const SESSION_KEY = 'pa_demo_session_v1';
+    const OWNER_ID = 'owner';
 
-            <div class="buttons">
-                <button class="btn btn-primary"
-                    onclick="alert('세션 만들기는 준비 중입니다!')">
-                    세션 만들기 →
-                </button>
+    const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+    const saveUsers = users => localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    const getInvites = () => JSON.parse(localStorage.getItem(INVITES_KEY) || '[]');
+    const saveInvites = invites => localStorage.setItem(INVITES_KEY, JSON.stringify(invites));
+    const currentUser = () => {
+      const id = localStorage.getItem(SESSION_KEY);
+      return getUsers().find(user => user.id === id) || null;
+    };
+    const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-                <button class="btn btn-secondary"
-                    onclick="alert('세션 목록은 준비 중입니다!')">
-                    세션 둘러보기
-                </button>
-            </div>
+    function showView(id) {
+      if (['mypage','admin'].includes(id) && !currentUser()) id = 'login';
+      if (id === 'admin' && !['owner','admin'].includes(currentUser()?.role)) id = 'home';
+      document.querySelectorAll('.view').forEach(view => view.classList.toggle('active', view.id === id));
+      window.scrollTo({top:0, behavior:'smooth'});
+      updateNav();
+      if (id === 'mypage') renderProfile();
+      if (id === 'admin') renderAdmin();
+    }
+    function updateNav() {
+      const user = currentUser();
+      document.getElementById('loginNav').classList.toggle('hidden', !!user);
+      document.getElementById('signupNav').classList.toggle('hidden', !!user);
+      document.getElementById('mypageNav').classList.toggle('hidden', !user);
+      document.getElementById('logoutNav').classList.toggle('hidden', !user);
+      document.getElementById('adminNav').classList.toggle('hidden', !user || !['owner','admin'].includes(user.role));
+    }
+    function logout() { localStorage.removeItem(SESSION_KEY); updateNav(); showView('home'); }
 
-        </section>
+    document.getElementById('signupForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const id = document.getElementById('signupId').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const confirm = document.getElementById('signupPassword2').value;
+      const code = document.getElementById('inviteCode').value.trim().toUpperCase();
+      const error = document.getElementById('signupError');
+      const users = getUsers();
+      error.textContent = '';
+      if (users.some(user => user.id.toLowerCase() === id.toLowerCase())) { error.textContent = '이미 사용 중인 아이디입니다.'; return; }
+      if (password !== confirm) { error.textContent = '비밀번호가 서로 일치하지 않습니다.'; return; }
+      let role = 'user';
+      if (code) {
+        const invites = getInvites();
+        const invite = invites.find(item => item.code === code && !item.used);
+        if (!invite) { error.textContent = '사용할 수 없는 초대 코드입니다.'; return; }
+        invite.used = true;
+        saveInvites(invites);
+        role = 'admin';
+      }
+      users.push({id, password, role, nickname:'', bio:'', avatar:''});
+      saveUsers(users);
+      localStorage.setItem(SESSION_KEY, id);
+      event.target.reset();
+      alert(role === 'admin' ? '관리자 계정이 생성되었습니다. (데모)' : '가입이 완료되었습니다. (데모)');
+      showView('mypage');
+    });
 
-        <!-- 소개 영역 -->
-        <section class="intro" id="intro">
-            <h2>모험은 여기서 시작됩니다.</h2>
+    document.getElementById('loginForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const id = document.getElementById('loginId').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const user = getUsers().find(item => item.id === id && item.password === password);
+      const error = document.getElementById('loginError');
+      if (!user) { error.textContent = '아이디 또는 비밀번호를 확인해 주세요.'; return; }
+      error.textContent = '';
+      localStorage.setItem(SESSION_KEY, id);
+      event.target.reset();
+      showView('home');
+    });
 
-            <p>
-                나만의 캐릭터를 만들고<br>
-                친구들과 함께 특별한 이야기를 만들어 보세요.
-            </p>
-        </section>
-    </main>
+    function renderProfile() {
+      const user = currentUser(); if (!user) return;
+      document.getElementById('profileTitle').textContent = user.nickname || user.id;
+      document.getElementById('profileId').textContent = '@' + user.id;
+      document.getElementById('nickname').value = user.nickname || '';
+      document.getElementById('bio').value = user.bio || '';
+      const avatar = document.getElementById('avatarPreview');
+      avatar.innerHTML = user.avatar ? `<img src="${user.avatar}" alt="프로필 이미지">` : '✧';
+    }
+    document.getElementById('avatarFile').addEventListener('change', event => {
+      const file = event.target.files[0]; if (!file) return;
+      if (!file.type.startsWith('image/')) { alert('이미지 파일을 선택해 주세요.'); return; }
+      if (file.size > 2 * 1024 * 1024) { alert('시제품에서는 2MB 이하 이미지를 권장합니다.'); return; }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const users = getUsers(), user = currentUser();
+        const target = users.find(item => item.id === user.id);
+        target.avatar = reader.result; saveUsers(users); renderProfile();
+      };
+      reader.readAsDataURL(file);
+    });
+    document.getElementById('profileForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const users = getUsers(), user = currentUser(), target = users.find(item => item.id === user.id);
+      target.nickname = document.getElementById('nickname').value.trim();
+      target.bio = document.getElementById('bio').value.trim();
+      saveUsers(users); renderProfile(); alert('프로필을 저장했습니다. (이 브라우저에만 저장)');
+    });
+    document.getElementById('passwordForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const user = currentUser(), users = getUsers(), target = users.find(item => item.id === user.id);
+      const error = document.getElementById('passwordError');
+      if (target.password !== document.getElementById('oldPassword').value) { error.textContent = '현재 비밀번호가 올바르지 않습니다.'; return; }
+      target.password = document.getElementById('newPassword').value;
+      saveUsers(users); error.textContent = ''; event.target.reset(); alert('비밀번호를 변경했습니다. (데모)');
+    });
+    function deleteAccount() {
+      const user = currentUser(); if (!user) return;
+      if (user.role === 'owner') { alert('최고 관리자 계정은 이 화면에서 탈퇴할 수 없습니다.'); return; }
+      if (!confirm('정말 탈퇴할까요? 이 브라우저에 저장된 데모 계정이 삭제됩니다.')) return;
+      saveUsers(getUsers().filter(item => item.id !== user.id));
+      logout(); alert('데모 계정을 삭제했습니다.');
+    }
+    function createInvite() {
+      const user = currentUser();
+      if (!user || user.role !== 'owner') { alert('최고 관리자만 코드를 발급할 수 있습니다.'); return; }
+      const code = 'PRIM-' + Array.from(crypto.getRandomValues(new Uint8Array(6)), n => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[n % 32]).join('');
+      const invites = getInvites(); invites.push({code, used:false}); saveInvites(invites);
+      const box = document.getElementById('newInvite');
+      box.classList.remove('hidden');
+      box.innerHTML = `<strong>새 초대 코드</strong><br><span style="font-size:19px;font-weight:800;letter-spacing:.08em">${escapeHtml(code)}</span><br><button class="btn btn-secondary" style="margin-top:10px" onclick="copyInvite('${code}')">코드 복사</button>`;
+      renderAdmin();
+    }
+    function copyInvite(code) {
+      navigator.clipboard?.writeText(code).then(() => alert('초대 코드를 복사했습니다.')).catch(() => alert('초대 코드: ' + code));
+    }
+    function renderAdmin() {
+      const user = currentUser(); if (!user) return;
+      document.getElementById('ownerTools').classList.toggle('hidden', user.role !== 'owner');
+      const users = getUsers();
+      const list = document.getElementById('memberList');
+      list.innerHTML = '<h3>이 브라우저의 데모 회원 목록</h3>' + users.map(item =>
+        `<div class="admin-item"><div><strong>${escapeHtml(item.nickname || item.id)}</strong><small>@${escapeHtml(item.id)}</small></div><span class="tag">${item.role === 'owner' ? 'OWNER' : item.role.toUpperCase()}</span></div>`
+      ).join('');
+    }
 
+    // 첫 실행 시 이 브라우저에만 데모 최고 관리자 계정을 생성합니다.
+    if (!getUsers().some(user => user.id === OWNER_ID)) {
+      const users = getUsers();
+      users.push({id:OWNER_ID, password:'Primordium-demo-2026!', role:'owner', nickname:'최고 관리자', bio:'', avatar:''});
+      saveUsers(users);
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updateNav();
+  </script>
 </body>
 </html>
